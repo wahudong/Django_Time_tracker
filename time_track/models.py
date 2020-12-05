@@ -14,7 +14,7 @@ class Project(models.Model):
 class TimeList(models.Model):
   start_time =  models.DateTimeField(auto_now=False)
   end_time = models.DateTimeField(auto_now=False)
-  time_length = models.DecimalField(max_digits=None, decimal_places=None)
+  time_length = models.DecimalField(max_digits=7, decimal_places=2)
   project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
   def __str__(self):
