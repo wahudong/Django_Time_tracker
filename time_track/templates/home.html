@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form  method="POST">
+  {% csrf_token %}
+  <label for="project_name">Project name</label>
+  <input  type="text" placeholder="Project name" name="projet_name">
+  <br>
+  <label for="completed">Completed?</label>
+  <input type="checkbox" name="completed">
+  <input type="hidden" value="1" name="operator">
+  <br>
+  <button class="" type="submit">Create Project</button>
+</form>
+
 
   <h2>{{context1}}</h2>
   <br>
   <h1>{{context2}}</h1>
 
-</body>
-</html>
+{% endblock %}
