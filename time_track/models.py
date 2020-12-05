@@ -5,6 +5,10 @@ from django.db import models
 class Project(models.Model):
   projet_name = models.CharField(max_length=200)
   completed = models.BooleanField(default = False)
+  user = models.ForeignKey(user, on_delete=models.CASCADE)
+
+  def __str__(self):
+        return "%s | %s" % (self.projet_name, self.user.username)
 
 # class TimeList(models.Model):
 #   start_time =  models.DateTimeField(auto_now=False)
