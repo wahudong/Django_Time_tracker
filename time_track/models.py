@@ -9,12 +9,13 @@ class Project(models.Model):
   operator = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
-        return "%s | %s" % (self.projet_name, self.operator.username)
+        return self.projet_name + self.operator.username
 
-# class TimeList(models.Model):
-#   start_time =  models.DateTimeField(auto_now=False)
-#   end_time = models.DateTimeField(auto_now=False)
-#   time_length = models.DecimalField(max_digits=None, decimal_places=None)
+class TimeList(models.Model):
+  start_time =  models.DateTimeField(auto_now=False)
+  end_time = models.DateTimeField(auto_now=False)
+  time_length = models.DecimalField(max_digits=None, decimal_places=None)
+  project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
-#   def __str__(self):
-#     return str(self.start_time) + '|' + str(self.end_time) + str(self.decimal_places)
+  def __str__(self):
+    return str(self.start_time) + '|' + str(self.end_time) + str(self.decimal_places)
