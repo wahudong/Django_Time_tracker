@@ -11,6 +11,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from django.urls import reverse
+
 # Create your views here.
 
 def home(request):
@@ -98,7 +100,7 @@ def create_project(request):
         form.save()
         projects_of_user =  Project.objects.filter(operator = request.user)
         messages.success(request,('The project has been created.'))
-        return render(request, 'home.html', {'user': request.user,'projects_of_user' : projects_of_user})
+        return redirect('home')
     else:
       # user_projects = Project.objects.get(pk=1)
 
