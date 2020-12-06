@@ -14,16 +14,20 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
-  if request.method == 'POST':
-    form = ProjectForm(request.POST or None)
-    if form.is_valid():
-      form.save()
-      user_projects = Project.objects.get(pk=1)
-      messages.success(request,('The project has been created.'))
-      return render(request, 'home.html', {'user_projects': user_projects})
+  if request.user.is_authenticated:
+    if request.method == 'POST':
+      form = ProjectForm(request.POST or None)
+      if form.is_valid():
+        form.save()
+        # user_projects = Project.objects.get(pk=1)
+        messages.success(request,('The project has been created.'))
+        return render(request, 'home.html', {'user': request.user})
+    else:
+      # user_projects = Project.objects.get(pk=1)
+      return render(request, 'home.html', {'user': request.user})
   else:
-    user_projects = Project.objects.all
-    return render(request, 'home.html', {'user_projects': user_projects})
+    return redirect('login')
+
 
 def register(request):
   # if request.user.is_authenticated:
