@@ -1,26 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div style="text-align: center; padding: auto; padding-top: 10vh;">
 
 <h1>Please Login</h1>
   <form method="POST" action="">
     {% csrf_token %}
     <div>
-      <input type="text" name="username" placeholder="Username...">
+      <input  type="text" name="username" placeholder="Username...">
     </div>
+
+    <br>
 
     <div>
       <input type="password" name="password" placeholder="Password...">
     </div>
 
-    <div>
-      <input type="submit" value="Login">
-    </div>
+    <br>
+
+    <input type="submit" value="Login">
+    <br>
+    <br>
+    <button><a href="{% url 'register'%}">Register</a></button>
+
   </form>
 
 <!-- {%for message in messages %} -->
   <p>{{message}}</p>
 
 <!-- {% endfor %} -->
+
+</div>
 
 {% endblock %}

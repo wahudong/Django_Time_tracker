@@ -15,16 +15,17 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
   if request.user.is_authenticated:
-    if request.method == 'POST':
-      form = ProjectForm(request.POST or None)
-      if form.is_valid():
-        form.save()
-        # user_projects = Project.objects.get(pk=1)
-        messages.success(request,('The project has been created.'))
-        return render(request, 'home.html', {'user': request.user})
-    else:
+    # if request.method == 'POST':
+    #   form = ProjectForm(request.POST or None)
+    #   if form.is_valid():
+    #     form.save()
+    #     # user_projects = Project.objects.get(pk=1)
+    #     messages.success(request,('The project has been created.'))
+    #     return render(request, 'home.html', {'user': request.user})
+    # else:
       # user_projects = Project.objects.get(pk=1)
-      return render(request, 'home.html', {'user': request.user})
+      projects_of_user =  Project.objects.filter(operator = request.user)
+      return render(request, 'home.html', {'user': request.user, 'projects_of_user':projects_of_user})
   else:
     return redirect('login')
 
@@ -86,6 +87,24 @@ def loginPage(request):
 def logoutPage(request):
   logout(request)
   return redirect('login')
+
+
+
+def create_project(request):
+  if request.user.is_authenticated:
+    if request.method == 'POST':
+      form = ProjectForm(request.POST or None)
+      if form.is_valid():
+        form.save()
+        projects_of_user =  Project.objects.filter(operator = request.user)
+        messages.success(request,('The project has been created.'))
+        return render(request, 'home.html', {'user': request.user,'projects_of_user' : projects_of_user})
+    else:
+      # user_projects = Project.objects.get(pk=1)
+
+      return render(request, 'create_project.html', {'user': request.user})
+  else:
+    return redirect('login')
 
 
 
