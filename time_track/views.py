@@ -26,20 +26,20 @@ def home(request):
     return render(request, 'home.html', {'user_projects': user_projects})
 
 def register(request):
-  if request.user.is_authenticated:
-    return redirect('home')
-  else:
-    form = CreateUserForm()
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-          form.save()
-          user = form.cleaned_data.get('username')
-          messages.success(request, 'Account was created for ' + user)
-          return redirect('login')
+  # if request.user.is_authenticated:
+  #   return redirect('home')
+  # else:
+  form = CreateUserForm()
+  if request.method == 'POST':
+      form = CreateUserForm(request.POST)
+      if form.is_valid():
+        form.save()
+        user = form.cleaned_data.get('username')
+        messages.success(request, 'Account was created for ' + user)
+        return redirect('login')
 
-    context={'form':form}
-    return render(request, 'register.html', context)
+  context={'form':form}
+  return render(request, 'register.html', context)
 
 # def loginPage(request):
 #   context='I am in login 3'
