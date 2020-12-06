@@ -1,4 +1,8 @@
+{% extends 'base.html' %}
 
+{% block content %}
+
+<h1>Please Register</h1>
 <form action="" method="POST">
   {% csrf_token %}
   {{form.username.label}}
@@ -26,3 +30,5 @@
 </form>
 
 <p>{{message}}</p>
+
+{%endblock%}

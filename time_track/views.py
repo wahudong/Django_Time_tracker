@@ -82,6 +82,13 @@ def loginPage(request):
 #     context={}
 #     return render(request, 'login.html', context)
 
+
+def logoutPage(request):
+  logout(request)
+  return redirect('login')
+
+
+
 def me(request):
   context='Ben, hello'
   return render(request,'me.html', {'context':context})
