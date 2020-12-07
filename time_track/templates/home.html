@@ -2,6 +2,13 @@
 
 {% block content %}
 
+<!-- <h3>my test is {{mytest}}</h3>
+<br>
+<br>
+<br>
+<h3>added hours are {{hours}}</h3> -->
+<br>
+<br>
   {%if messages %}
     {% for message in messages %}
       {{message}}
@@ -10,60 +17,68 @@
 
   <h4>User name: {{user}}</h4>
 
-  <!-- <form  method="POST">
-    {% csrf_token %}
-    <label for="project_name">Project name</label>
-    <input  type="text" placeholder="Project name" name="projet_name">
-    <br>
-    <label for="completed">Completed?</label>
-    <input type="checkbox" name="completed">
-    <input type="hidden" value="{{user.id}}" name="operator">
-    <br>
-    <br>
-    <button type="submit">Create Project</button>
-  </form> -->
+  <div class="center border">
+    <!-- <form  method="POST">
+      {% csrf_token %}
+      <label for="project_name">Project name</label>
+      <input  type="text" placeholder="Project name" name="projet_name">
+      <br>
+      <label for="completed">Completed?</label>
+      <input type="checkbox" name="completed">
+      <input type="hidden" value="{{user.id}}" name="operator">
+      <br>
+      <br>
+      <button type="submit">Create Project</button>
+    </form> -->
 
-  <button><a href="{%url 'create_project'%}">Create Project</a></button>
+    <br>
+    <br>
+
+    <form class="auto-margin border" action="" method="POST" style="width: 50vw">
+      {% csrf_token %}
+      <table style="width: 50vw">
+        <tr style="bottom: red;">
+          <th >Project</th>
+          <th>Total Hours</th>
+          <th>Hours to add</th>
+          <th></th>
+        </tr>
+
+        {%if projects_of_user%}
+          {%for project in projects_of_user%}
+            <tr>
+              <td class="center">
+                {{project.projet_name}}
+              </td>
+
+              <td class="center">
+                {{project.time_length}}
+              </td>
+
+              <td class="center">
+                <input type="number" step="any" name="addHours">
+              </td>
+
+              <input type="hidden" value="{{project.id}}" name="project_id">
+
+              <td>
+                <input type="submit" value="Add new hours">
+              </td>
+
+            </tr>
+          {%endfor%}
+        {%endif%}
+      </table>
+
+      <br>
+      <input type="submit" value="Add new hours">
+
+  </form>
   <br>
   <br>
   <br>
+  <button><a href="{% url 'logout' %}">Logout</a></button>
 
-  <form action="" method="POST" style="width: 50vw; border: 1 black solid;">
-    {% csrf_token %}
-    <table style="width: 50vw; border: 1px solid red;">
-      <tr>
-        <th >Project</th>
-        <th>Total Hours</th>
-        <th>Hours to add</th>
-      </tr>
-
-      {%if projects_of_user%}
-        {%for project in projects_of_user%}
-          <tr>
-            <td class="center">
-              {{project.projet_name}}
-            </td>
-
-            <td class="center">
-              {{project.time_length}}
-            </td>
-
-            <td class="center">
-              <input type="number" step="any" name="addHours">
-            </td>
-
-          </tr>
-        {%endfor%}
-      {%endif%}
-    </table>
-
-    <br>
-    <input type="submit" value="Add new hours">
-
-</form>
-<br>
-<br>
-<br>
-<button><a href="{% url 'logout' %}">Logout</a></button>
+  </div>
 
 {% endblock %}
