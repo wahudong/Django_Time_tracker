@@ -9,3 +9,8 @@
 .auto-margin{
   margin: auto;
 }
+
+table, th, td {
+  border: 1px solid gray;
+  border-collapse: collapse;
+}

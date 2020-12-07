@@ -2,33 +2,39 @@
 
 {% block content %}
 
-<h1>Please Register</h1>
-<form action="" method="POST">
-  {% csrf_token %}
-  {{form.username.label}}
+<div class="auto-margin" style="width: 15vw; padding:20 auto;">
+  <h3>Please Register</h3>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{form.username.label}}
+    <br>
+    {{form.username}}
+
+    <br>  <br>
+
+    {{form.email.label}}
+    <br>
+    {{form.email}}
+
+    <br>  <br>
+
+    {{form.password1.label}}
+    <br>
+    {{form.password1}}
+
+    <br>  <br>
+
+    {{form.password2.label}}
+    <br>
+    {{form.password2}}
+    <br>
+    <br>
+    <input type="submit" name="Create User">
+  </form>
   <br>
-  {{form.username}}
 
-  <br>  <br>
-
-  {{form.email.label}}
+  <button><a href="{% url 'login'%}">Login</a></button>
   <br>
-  {{form.email}}
-
-  <br>  <br>
-
-  {{form.password1.label}}
-  <br>
-  {{form.password1}}
-
-  <br>  <br>
-
-  {{form.password2.label}}
-  <br>
-  {{form.password2}}
-  <input type="submit" name="Create User">
-</form>
-
-<p>{{message}}</p>
-
+  <p>{{message}}</p>
+</div>
 {%endblock%}
