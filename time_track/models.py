@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class Project(models.Model):
   projet_name = models.CharField(max_length=200)
   completed = models.BooleanField(default = False)
+  totalHours = models.DecimalField(max_digits=7, decimal_places=2, null=True)
   operator = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):

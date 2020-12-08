@@ -64,7 +64,11 @@
               </td>
 
               <td class="center">
-                {{project.time_length}}
+
+                {%if project.totalHours is not None%}
+                  {{project.totalHours}}
+                {%endif%}
+
               </td>
 
               <td class="center">
@@ -78,11 +82,7 @@
               <input type="hidden" value="{{project.id}}" name="project_id">
 
               <td>
-
-               <!-- {{project.time_length}} -->
-
                 <a href="{% url 'modify_time'  project.id %}">Modify</a>
-
 
                 <!-- <input type="submit" value="Add new hours"> -->
               </td>
