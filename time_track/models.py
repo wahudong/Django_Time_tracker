@@ -18,4 +18,4 @@ class TimeList(models.Model):
   project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
   def __str__(self):
-    return str(self.start_time) + '|' + str(self.end_time) + str(self.decimal_places)
+    return str(self.start_time) + ' | ' + str(self.end_time) +' | '+ str(self.time_length)

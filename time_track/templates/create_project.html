@@ -2,32 +2,35 @@
 
 {% block content %}
 
-<h1>Create Project</h1>
+<div style="width: 20vw;margin: auto; margin-top: 100px;" class="center">
+    <h1>Create Project</h1>
 
-<h4>User name: {{user}}</h4>
+    <h4>User name: {{user}}</h4>
 
-{%if messages %}
-  {% for message in messages %}
-    {{message}}
-  {%endfor%}
-{% endif %}
+    {%if messages %}
+      {% for message in messages %}
+        {{message}}
+      {%endfor%}
+    {% endif %}
 
 
+    <div style="text-align: left; margin-left: 2vw;">
+      <form  method="POST">
+        {% csrf_token %}
+        <label for="project_name">Project name</label>
+        <input  type="text" placeholder="Project name" name="projet_name">
 
-<form  method="POST">
-  {% csrf_token %}
-  <label for="project_name">Project name</label>
-  <input  type="text" placeholder="Project name" name="projet_name">
-  <br>
-  <label for="completed">Completed?</label>
-  <input type="checkbox" name="completed">
-  <input type="hidden" value="{{user.id}}" name="operator">
-  <br>
-  <br>
-  <button type="submit">Create Project</button>
-  <button><a href="{%url 'home'%}">Cancel</a></button>
-</form>
-
-<br>
-
+        <br><br>
+        <label for="completed">Completed?</label>
+        <input type="checkbox" name="completed">
+        <input type="hidden" value="{{user.id}}" name="operator">
+        <br>
+        <br>
+        <button type="submit">Create Project</button>
+        &nbsp
+        <button><a href="{%url 'home'%}">Cancel</a></button>
+      </form>
+  </div>
+    <br>
+</div>
 {%endblock%}

@@ -24,7 +24,9 @@ def home(request):
     mytest = 'Not a POST'
     hours = 0
     if request.method == 'POST':
-      mytest = request.POST
+      mytest_ = request.POST.dict()
+      mytest = mytest_['addHours']
+      # mytest = request.POST.get('addHours')
       hours_unicode = request.body.decode('utf-8')
       # hours = json.load(hours_unicode)
       # hour = hours[0]
@@ -121,6 +123,13 @@ def create_project(request):
       return render(request, 'create_project.html', {'user': request.user})
   else:
     return redirect('login')
+
+def modify_time(request, project):
+  if request.method == 'POST':
+    time = 0
+  else:
+    timePeriod = TimeList.objects.filter(project = project)
+    return render(request, 'modify_time.html', {'timePeriod':timePeriod})
 
 
 
