@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="auto-margin" style="width: 15vw; padding:20 auto;">
+<div class="auto-margin" style="width: 25vw; padding:30 auto;">
   <h3>Please Register</h3>
   <form action="" method="POST">
     {% csrf_token %}
@@ -35,6 +35,6 @@
 
   <button><a href="{% url 'login'%}">Login</a></button>
   <br>
-  <p>{{message}}</p>
+  <p>{{form.errors}}</p>
 </div>
 {%endblock%}
