@@ -14,3 +14,7 @@ table, th, td {
   border: 1px solid gray;
   border-collapse: collapse;
 }
+
+.groupe-space{
+  margin-top: 8px;
+}

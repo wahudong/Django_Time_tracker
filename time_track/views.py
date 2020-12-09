@@ -15,6 +15,7 @@ from django.urls import reverse
 import json
 from django.http import HttpResponse
 from django.http import JsonResponse
+from urllib.parse import urlencode
 
 
 # Create your views here.
@@ -124,15 +125,25 @@ def create_project(request):
   else:
     return redirect('login')
 
-def modify_time(request, project):
+def modify_time(request, project_id):
   if request.method == 'POST':
-    time = 0
+      addHours = request.POST.get('addHours')
+      base_url = reverse('me')  # 1 get me.html path
+      query_string =  urlencode({'addHours': addHours})
+      url = '{}?{}'.format(base_url, query_string)
+      return redirect(url)
   else:
-    timePeriod = TimeList.objects.filter(project = project)
-    return render(request, 'modify_time.html', {'timePeriod':timePeriod})
+      # timePeriod = TimeList.objects.filter(project = project)
+      # return render(request, 'modify_time.html', {'timePeriod':timePeriod})
+      project = Project.objects.get(pk=project_id)
+      return render(request, 'modify_time.html', {'project': project})
+
+# def modify_time(request):
+#   if request.method == 'POST':
+
 
 
 
 def me(request):
-  context='Ben, hello'
+  context= request.GET.get('addHours')
   return render(request,'me.html', {'context':context})
