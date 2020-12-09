@@ -25,8 +25,8 @@ def home(request):
     mytest = 'Not a POST' #just for debug
     # hours = 0 # for debug
     if request.method == 'POST':
-      mytest_ = request.POST.dict()
-      mytest = mytest_['addHours']
+      # mytest_ = request.POST.dict()
+      # mytest = mytest_['addHours']
       # mytest = request.POST.get('addHours')
       hours_unicode = request.body.decode('utf-8')
       # hours = json.load(hours_unicode)
@@ -60,6 +60,8 @@ def register(request):
         user = form.cleaned_data.get('username')
         messages.success(request, 'Account was successfuly created for ' + user)
         return redirect('login')
+      # else:
+      #   messages.error(request, 'Register fail, Please try again')
 
   context={'form':form}
   return render(request, 'register.html', context)
