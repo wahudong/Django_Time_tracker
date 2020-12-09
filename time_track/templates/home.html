@@ -45,7 +45,7 @@
         <tr style="background-color: aqua;">
           <th >Project Description</th>
           <th>Project ID</th>
-          <th>Total Hours</th>
+          <th>Current Total Hours</th>
           <th>Completed?</th>
           <!-- <th>Hours to add</th> -->
           <th></th>
@@ -53,7 +53,7 @@
 
         {%if projects_of_user%}
           {%for project in projects_of_user%}
-            <tr>
+            <tr style-top="padding: 5px;">
               <td class="center">
                 {{project.projet_name}}
               </td>
@@ -82,7 +82,7 @@
               <input type="hidden" value="{{project.id}}" name="project_id">
 
               <td class="center">
-                <button style="margin: auto;"><a href="{% url 'modify_time'  project.id %}">Add hours to this project</a></button>
+                <button style="margin: auto; "><a href="{% url 'modify_time'  project.id %}" style="text-decoration: none;">Add hours to this project</a></button>
 
                 <!-- <input type="submit" value="Add new hours"> -->
               </td>
