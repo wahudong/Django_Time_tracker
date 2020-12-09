@@ -22,8 +22,8 @@ from urllib.parse import urlencode
 
 def home(request):
   if request.user.is_authenticated:
-    mytest = 'Not a POST'
-    hours = 0
+    mytest = 'Not a POST' #just for debug
+    # hours = 0 # for debug
     if request.method == 'POST':
       mytest_ = request.POST.dict()
       mytest = mytest_['addHours']
@@ -42,8 +42,8 @@ def home(request):
         #   return render(request, 'home.html', {'user': request.user})
 
     projects_of_user =  Project.objects.filter(operator = request.user)
-    return render(request, 'home.html', {'hours':hours,'mytest':mytest,'user': request.user, 'projects_of_user':projects_of_user})
-
+    # return render(request, 'home.html', {'hours':hours,'mytest':mytest,'user': request.user, 'projects_of_user':projects_of_user})
+    return render(request, 'home.html', {'user': request.user, 'projects_of_user':projects_of_user})
   else:
     return redirect('login')
 
@@ -126,22 +126,32 @@ def create_project(request):
     return redirect('login')
 
 def modify_time(request, project_id):
+  project = Project.objects.get(pk=project_id)
   if request.method == 'POST':
-      addHours = request.POST.get('addHours')
-      base_url = reverse('me')  # 1 get me.html path
-      query_string =  urlencode({'addHours': addHours})
-      url = '{}?{}'.format(base_url, query_string)
-      return redirect(url)
+      addHours = request.POST.get('addHours') #get the 'addHours' in the form from POST
+      if addHours == '':
+        addHours = 0
+      if project.totalHours is None:
+        totalHours = 0
+      else:
+        totalHours = float(project.totalHours)
+      totalHours += float(addHours)
+      project.totalHours = totalHours
+      project.save()
+      return redirect('home')
+
+      # base_url = reverse('me')  # 1 get me.html path
+      # query_string =  urlencode({'addHours': addHours})
+      # url = '{}?{}'.format(base_url, query_string)
+      # return redirect(url)
   else:
       # timePeriod = TimeList.objects.filter(project = project)
       # return render(request, 'modify_time.html', {'timePeriod':timePeriod})
-      project = Project.objects.get(pk=project_id)
+
       return render(request, 'modify_time.html', {'project': project})
 
 # def modify_time(request):
 #   if request.method == 'POST':
-
-
 
 
 def me(request):

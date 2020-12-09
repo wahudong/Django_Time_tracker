@@ -12,12 +12,13 @@
   <form method="POST">
     {% csrf_token %}
     <label for="projet_name">Project description</label>
-    <input type="text" name="projet_name" value="{{project.projet_name}}" disabled>
+    <input type="text" name="projet_name" value="{{project.projet_name}}" readonly>
 
     <br>
-    <label for="totalHours" >Total hours</label>
-    <input type="number" name="totalHours" value="{{project.totalHours}}" disabled>
-
+    <div style="margin-top: 7px;">
+      <label for="totalHours" >Current total hours</label>
+      <input type="number" name="totalHours" value="{{project.totalHours}}" readonly>
+    </div>
     <br><br><br>
     <div class="border" style="padding: 8px; border-radius: 10px;">
       <label for="completed">Completed?</label>
@@ -33,7 +34,8 @@
 
       <br>
       <br>
-      <button type="submit">Update button</button>
+      <button type="submit" style="border-radius: 5px;">Update</button>
+      <button><a href="{% url 'home' %}">Cancel</a></button>
       <!-- <input type="submit" value="Update"> -->
   </div>
   </form>
