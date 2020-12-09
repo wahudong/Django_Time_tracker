@@ -137,6 +137,11 @@ def modify_time(request, project_id):
         totalHours = float(project.totalHours)
       totalHours += float(addHours)
       project.totalHours = totalHours
+      completed = request.POST.get('completed')
+      if request.POST.get('completed') == 'on':
+        project.completed = True
+      else:
+        project.completed = False
       project.save()
       return redirect('home')
 
