@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 import json
 from django.http import HttpResponse
-from django.http import JsonResponse
+# from django.http import JsonResponse
 from urllib.parse import urlencode
 
 
